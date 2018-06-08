@@ -9,9 +9,7 @@ node
 yarn.lock
 .idea/
 **.iml
-**/themes/**/styles.css
-**/VAADIN/frontend/
-vaadin-board-integration-tests/error-screenshots/
+vaadin-confirm-dialog-integration-tests/error-screenshots/
 
 .DS_Store
 local.properties
