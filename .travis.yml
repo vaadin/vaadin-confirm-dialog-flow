@@ -2,7 +2,7 @@ language: java
 jdk: oraclejdk8
 dist: trusty
 before_install: echo "sauce.user=$SAUCE_USER" > local.properties && echo "sauce.sauceAccessKey=$SAUCE_ACCESSKEY" >> local.properties
-script: mvn -B verify -Dvaadin.proKey=$VAADIN_PRO_KEY
+script: mvn -B verify -Dvaadin.proKey=$VAADIN_PRO_KEY -Dvaadin.productionMode
 #deploy:
 #  - provider: script
 #    script: ./.travis.deploy.sh
