@@ -1,0 +1,24 @@
+language: java
+jdk: oraclejdk8
+dist: trusty
+before_install: echo "sauce.user=$SAUCE_USER" > local.properties && echo "sauce.sauceAccessKey=$SAUCE_ACCESSKEY" >> local.properties
+script: mvn -B verify -Dvaadin.proKey=$VAADIN_PRO_KEY -Dvaadin.productionMode
+#deploy:
+#  - provider: script
+#    script: ./.travis.deploy.sh
+#    skip_cleanup: true
+#    on:
+#      branch: master
+
+# Cache requires a master build
+branches:
+  only:
+    - master
+cache:
+  directories:
+  - $HOME/.m2
+
+before_cache:
+  # remove all build artifacts
+  - rm -rf $HOME/.m2/repository/com/vaadin/vaadin-confirm-dialog-flow
+
