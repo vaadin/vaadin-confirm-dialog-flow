@@ -18,18 +18,239 @@ package com.vaadin.flow.component.confirmdialog;
  */
 
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.ComponentEvent;
+import com.vaadin.flow.component.ComponentEventListener;
+import com.vaadin.flow.component.ComponentUtil;
+import com.vaadin.flow.component.DomEvent;
 import com.vaadin.flow.component.HasOrderedComponents;
 import com.vaadin.flow.component.HasSize;
 import com.vaadin.flow.component.HasStyle;
+import com.vaadin.flow.component.Synchronize;
 import com.vaadin.flow.component.Tag;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.dependency.HtmlImport;
+import com.vaadin.flow.shared.Registration;
 
 @Tag("vaadin-confirm-dialog")
 @HtmlImport("frontend://bower_components/vaadin-confirm-dialog/vaadin-confirm-dialog.html")
 public class ConfirmDialog extends Component
         implements HasSize, HasStyle, HasOrderedComponents<ConfirmDialog> {
 
-    public ConfirmDialog() {
+    @DomEvent("confirm")
+    public static class ConfirmDialogConfirmEvent
+            extends ComponentEvent<ConfirmDialog> {
+        public ConfirmDialogConfirmEvent(ConfirmDialog source,
+                boolean fromClient) {
+            super(source, fromClient);
+        }
     }
 
+    @DomEvent("reject")
+    public static class ConfirmDialogRejectEvent
+            extends ComponentEvent<ConfirmDialog> {
+        public ConfirmDialogRejectEvent(ConfirmDialog source,
+                boolean fromClient) {
+            super(source, fromClient);
+        }
+    }
+
+    @DomEvent("cancel")
+    public static class ConfirmDialogCancelEvent
+            extends ComponentEvent<ConfirmDialog> {
+        public ConfirmDialogCancelEvent(ConfirmDialog source,
+                boolean fromClient) {
+            super(source, fromClient);
+        }
+    }
+
+    private boolean autoAddedToTheUi;
+
+    public ConfirmDialog() {
+        getElement().addEventListener("opened-changed", event -> {
+            if (autoAddedToTheUi && !isOpened()) {
+                getElement().removeFromParent();
+                autoAddedToTheUi = false;
+            }
+        });
+    }
+
+    public ConfirmDialog(String header, String text, String confirmText,
+            ComponentEventListener<ConfirmDialogConfirmEvent> confirmListener) {
+        this();
+        setHeader(header);
+        setText(text);
+        setConfirmText(confirmText);
+        addConfirmListener(confirmListener);
+    }
+
+    public ConfirmDialog(String header, String text, String confirmText,
+            ComponentEventListener<ConfirmDialogConfirmEvent> confirmListener,
+            String cancelText,
+            ComponentEventListener<ConfirmDialogCancelEvent> cancelListener) {
+        this(header, text, confirmText, confirmListener);
+        setCancelButton(cancelText, cancelListener);
+    }
+
+    public ConfirmDialog(String header, String text, String confirmText,
+            ComponentEventListener<ConfirmDialogConfirmEvent> confirmListener,
+            String rejectText,
+            ComponentEventListener<ConfirmDialogRejectEvent> rejectListener,
+            String cancelText,
+            ComponentEventListener<ConfirmDialogCancelEvent> cancelListener) {
+        this(header, text, confirmText, confirmListener, cancelText,
+                cancelListener);
+        setRejectButton(rejectText, rejectListener);
+    }
+
+    public void setCancelable(boolean cancelable) {
+        getElement().setProperty("cancel", cancelable);
+    }
+
+    public void setConfirmable(boolean confirmable) {
+        getElement().setProperty("confirm", confirmable);
+    }
+
+    public void setRejectable(boolean rejectable) {
+        getElement().setProperty("reject", rejectable);
+    }
+
+    public void setRejectButton(String buttonText,
+            ComponentEventListener<ConfirmDialogRejectEvent> rejectListener) {
+        setRejectText(buttonText);
+        addRejectListener(rejectListener);
+    }
+
+    public void setRejectButton(String buttonText,
+            ComponentEventListener<ConfirmDialogRejectEvent> rejectListener,
+            String theme) {
+        setRejectText(buttonText);
+        addRejectListener(rejectListener);
+        setRejectButtonTheme(theme);
+    }
+
+    public void setCancelButton(String buttonText,
+            ComponentEventListener<ConfirmDialogCancelEvent> cancelListener) {
+        setCancelText(buttonText);
+        addCancelListener(cancelListener);
+    }
+
+    public void setCancelButton(String buttonText,
+            ComponentEventListener<ConfirmDialogCancelEvent> cancelListener,
+            String theme) {
+        setCancelText(buttonText);
+        addCancelListener(cancelListener);
+        setCancelButtonTheme(theme);
+    }
+
+    public void setConfirmButton(String buttonText,
+            ComponentEventListener<ConfirmDialogConfirmEvent> confirmListener) {
+        setConfirmText(buttonText);
+        addConfirmListener(confirmListener);
+    }
+
+    public void setConfirmButton(String buttonText,
+            ComponentEventListener<ConfirmDialogConfirmEvent> confirmListener,
+            String theme) {
+        setConfirmText(buttonText);
+        addConfirmListener(confirmListener);
+        setConfirmButtonTheme(theme);
+    }
+
+    public void setText(String message) {
+        getElement().setProperty("message", message);
+    }
+
+    public void setConfirmText(String confirmText) {
+        getElement().setProperty("confirmText", confirmText);
+
+    }
+
+    public void setConfirmButtonTheme(String confirmTheme) {
+        getElement().setProperty("confirmTheme", confirmTheme);
+    }
+
+    Registration addConfirmListener(
+            ComponentEventListener<ConfirmDialogConfirmEvent> listener) {
+        return ComponentUtil.addListener((Component) this,
+                ConfirmDialogConfirmEvent.class,
+                (ComponentEventListener) listener);
+    }
+
+    public void setCancelText(String cancelText) {
+        getElement().setProperty("cancelText", cancelText);
+
+    }
+
+    public void setCancelButtonTheme(String cancelTheme) {
+        getElement().setProperty("cancelTheme", cancelTheme);
+    }
+
+    Registration addCancelListener(
+            ComponentEventListener<ConfirmDialogCancelEvent> listener) {
+        return ComponentUtil.addListener((Component) this,
+                ConfirmDialogCancelEvent.class,
+                (ComponentEventListener) listener);
+    }
+
+    public void setRejectText(String rejectText) {
+        getElement().setProperty("rejectText", rejectText);
+
+    }
+
+    public void setRejectButtonTheme(String rejectTheme) {
+        getElement().setProperty("rejectTheme", rejectTheme);
+    }
+
+    Registration addRejectListener(
+            ComponentEventListener<ConfirmDialogRejectEvent> listener) {
+        return ComponentUtil.addListener((Component) this,
+                ConfirmDialogRejectEvent.class,
+                (ComponentEventListener) listener);
+    }
+
+    public void setHeader(String header) {
+        getElement().setProperty("header", header);
+    }
+
+    public void open() {
+        setOpened(true);
+    }
+
+    public void close() {
+        setOpened(false);
+    }
+
+    @Synchronize(property = "opened", value = "opened-changed")
+    public boolean isOpened() {
+        return getElement().getProperty("opened", false);
+    }
+
+    public void setOpened(boolean opened) {
+        if (opened) {
+            ensureAttached();
+        }
+        getElement().setProperty("opened", opened);
+    }
+
+    private UI getCurrentUI() {
+        UI ui = UI.getCurrent();
+        if (ui == null) {
+            throw new IllegalStateException("UI instance is not available. "
+                    + "It means that you are calling this method "
+                    + "out of a normal workflow where it's always implicitely set. "
+                    + "That may happen if you call the method from the custom thread without "
+                    + "'UI::access' or from tests without proper initialization.");
+        }
+        return ui;
+    }
+
+    private void ensureAttached() {
+        if (getElement().getNode().getParent() == null) {
+            UI ui = getCurrentUI();
+            ui.beforeClientResponse(ui, context -> {
+                ui.add(this);
+                autoAddedToTheUi = true;
+            });
+        }
+    }
 }
