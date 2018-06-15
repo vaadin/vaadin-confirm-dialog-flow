@@ -147,6 +147,7 @@ public class ConfirmDialog extends Component
     }
 
     public void setCancelButton(Element element) {
+        setCancelable(true);
         addToSlot("cancel-button", element);
     }
 
@@ -178,7 +179,7 @@ public class ConfirmDialog extends Component
     }
 
     public void setText(Element element) {
-        addToSlot("message", element);
+        getElement().appendChild(element);
     }
 
     public void setConfirmText(String confirmText) {

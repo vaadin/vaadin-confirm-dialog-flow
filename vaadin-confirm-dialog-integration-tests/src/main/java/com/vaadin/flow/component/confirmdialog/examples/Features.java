@@ -43,14 +43,14 @@ public class Features extends Div {
         add(button);
     }
 
-    private ConfirmDialog createConfirmDialog(String sample) {
+    protected ConfirmDialog createConfirmDialog(String sample) {
         ConfirmDialog dialog = new ConfirmDialog("Meeting starting",
                 "Your next meeting starts in 5 minutes", "OK", this::onOK);
         dialog.setId(sample);
         return dialog;
     }
 
-    private ConfirmDialog createConfirmDeleteDialog(String sample) {
+    protected ConfirmDialog createConfirmDeleteDialog(String sample) {
         ConfirmDialog dialog = new ConfirmDialog("Delete product",
                 "Are you sure you want to delete? This operation can not be undone.",
                 "Delete", this::onDelete, "Cancel", this::onCancel);
@@ -59,7 +59,7 @@ public class Features extends Div {
         return dialog;
     }
 
-    private ConfirmDialog createConfirmPublishDialog(String sample) {
+    protected ConfirmDialog createConfirmPublishDialog(String sample) {
         ConfirmDialog dialog = new ConfirmDialog("Ready to publish?",
                 "Do you want to publish this post?", "Publish", this::onPublish,
                 "Cancel", this::onCancel);
@@ -67,7 +67,7 @@ public class Features extends Div {
         return dialog;
     }
 
-    private ConfirmDialog createUnsavedChangesDialog(String sample) {
+    protected ConfirmDialog createUnsavedChangesDialog(String sample) {
         ConfirmDialog dialog = new ConfirmDialog("Unsaved changes",
                 "Do you want to save or discard your changes before navigating away?",
                 "Save", this::onSave, "Discard", this::onDiscard, "Cancel",
@@ -82,32 +82,32 @@ public class Features extends Div {
         dialog.open();
     }
 
-    private void onOK(Object event) {
+    protected void onOK(Object event) {
         eventName.setText(event.getClass().getSimpleName());
         status.add(new Text("Ok clicked"));
     }
 
-    private void onPublish(Object event) {
+    protected void onPublish(Object event) {
         eventName.setText(event.getClass().getSimpleName());
         status.add(new Text("Publish clicked"));
     }
 
-    private void onSave(Object event) {
+    protected void onSave(Object event) {
         eventName.setText(event.getClass().getSimpleName());
         status.add(new Text("Save clicked"));
     }
 
-    private void onDelete(Object event) {
+    protected void onDelete(Object event) {
         eventName.setText(event.getClass().getSimpleName());
         status.add(new Text("Delete clicked"));
     }
 
-    private void onDiscard(Object event) {
+    protected void onDiscard(Object event) {
         eventName.setText(event.getClass().getSimpleName());
         status.add(new Text("Discard clicked"));
     }
 
-    private void onCancel(Object event) {
+    protected void onCancel(Object event) {
         eventName.setText(event.getClass().getSimpleName());
         status.add(new Text("Cancel clicked"));
     }
