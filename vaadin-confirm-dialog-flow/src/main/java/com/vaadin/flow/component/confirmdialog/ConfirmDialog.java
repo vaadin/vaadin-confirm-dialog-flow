@@ -79,8 +79,7 @@ public class ConfirmDialog extends Component
         this();
         setHeader(header);
         setText(text);
-        setConfirmText(confirmText);
-        addConfirmListener(confirmListener);
+        setConfirmButton(confirmText, confirmListener);
     }
 
     public ConfirmDialog(String header, String text, String confirmText,
@@ -116,6 +115,7 @@ public class ConfirmDialog extends Component
 
     public void setRejectButton(String buttonText,
             ComponentEventListener<ConfirmDialogRejectEvent> rejectListener) {
+        setRejectable(true);
         setRejectText(buttonText);
         addRejectListener(rejectListener);
     }
@@ -123,13 +123,13 @@ public class ConfirmDialog extends Component
     public void setRejectButton(String buttonText,
             ComponentEventListener<ConfirmDialogRejectEvent> rejectListener,
             String theme) {
-        setRejectText(buttonText);
-        addRejectListener(rejectListener);
+        setRejectButton(buttonText, rejectListener);
         setRejectButtonTheme(theme);
     }
 
     public void setCancelButton(String buttonText,
             ComponentEventListener<ConfirmDialogCancelEvent> cancelListener) {
+        setCancelable(true);
         setCancelText(buttonText);
         addCancelListener(cancelListener);
     }
@@ -137,13 +137,13 @@ public class ConfirmDialog extends Component
     public void setCancelButton(String buttonText,
             ComponentEventListener<ConfirmDialogCancelEvent> cancelListener,
             String theme) {
-        setCancelText(buttonText);
-        addCancelListener(cancelListener);
+        setCancelButton(buttonText, cancelListener);
         setCancelButtonTheme(theme);
     }
 
     public void setConfirmButton(String buttonText,
             ComponentEventListener<ConfirmDialogConfirmEvent> confirmListener) {
+        setConfirmable(true);
         setConfirmText(buttonText);
         addConfirmListener(confirmListener);
     }
@@ -151,8 +151,7 @@ public class ConfirmDialog extends Component
     public void setConfirmButton(String buttonText,
             ComponentEventListener<ConfirmDialogConfirmEvent> confirmListener,
             String theme) {
-        setConfirmText(buttonText);
-        addConfirmListener(confirmListener);
+        setConfirmButton(buttonText, confirmListener);
         setConfirmButtonTheme(theme);
     }
 
@@ -237,7 +236,7 @@ public class ConfirmDialog extends Component
         if (ui == null) {
             throw new IllegalStateException("UI instance is not available. "
                     + "It means that you are calling this method "
-                    + "out of a normal workflow where it's always implicitely set. "
+                    + "out of a normal workflow where it's always implicitly set. "
                     + "That may happen if you call the method from the custom thread without "
                     + "'UI::access' or from tests without proper initialization.");
         }
