@@ -5,11 +5,11 @@ before_install:
   - rvm install 2.2
   - rvm use 2.2
   - gem install hiptest-publisher
-  - ./generateHiptestTests.sh $HIPTEST_SECRET $HIPTEST_TEST_RUN
+  - sh generateHiptestTests.sh $HIPTEST_SECRET $HIPTEST_TEST_RUN
   - echo "sauce.user=$SAUCE_USER" > local.properties && echo "sauce.sauceAccessKey=$SAUCE_ACCESSKEY" >> local.properties
 script: mvn -B verify -Dvaadin.proKey=$VAADIN_PRO_KEY -Dvaadin.productionMode
 after_script:
-  - ./publishHiptestResults.sh $HIPTEST_SECRET $HIPTEST_TEST_RUN
+  - sh publishHiptestResults.sh $HIPTEST_SECRET $HIPTEST_TEST_RUN
 #deploy:
 #  - provider: script
 #    script: ./.travis.deploy.sh
