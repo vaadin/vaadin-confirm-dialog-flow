@@ -1,8 +1,15 @@
 language: java
 jdk: oraclejdk8
 dist: trusty
-before_install: echo "sauce.user=$SAUCE_USER" > local.properties && echo "sauce.sauceAccessKey=$SAUCE_ACCESSKEY" >> local.properties
+before_install:
+  - rvm install 2.2
+  - rvm use 2.2
+  - gem install hiptest-publisher
+  - hiptest-publisher -c vaadin-confirm-dialog-integration-tests/hiptest/hiptest-publisher.config  --token=$HIPTEST_SECRET --only=tests --test-run-id=$HIPTEST_TEST_RUN
+  - echo "sauce.user=$SAUCE_USER" > local.properties && echo "sauce.sauceAccessKey=$SAUCE_ACCESSKEY" >> local.properties
 script: mvn -B verify -Dvaadin.proKey=$VAADIN_PRO_KEY -Dvaadin.productionMode
+after_script:
+  - hiptest-publisher -c vaadin-confirm-dialog-integration-tests/hiptest/hiptest-publisher.config --token=$HIPTEST_SECRET -p "vaadin-confirm-dialog-integration-tests/target/failsafe-reports/TEST-*hiptest.*.xml" --test-run-id=$HIPTEST_TEST_RUN
 #deploy:
 #  - provider: script
 #    script: ./.travis.deploy.sh
