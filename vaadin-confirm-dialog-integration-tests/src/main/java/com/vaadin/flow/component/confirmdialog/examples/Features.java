@@ -1,6 +1,6 @@
 package com.vaadin.flow.component.confirmdialog.examples;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.function.Function;
 
@@ -21,10 +21,12 @@ public class Features extends Div {
     static final String UNSAVED_CHANGES_DIALOG = "SampleUnsavedChangesDialog";
 
     private Div status = new Div(new Text(""));
+    private Div eventName = new Div(new Text(""));
 
     public Features() {
-        add(status);
-        Map<String, Function<String, ConfirmDialog>> samples = new HashMap<>();
+        eventName.setId("eventName");
+        add(status, eventName);
+        Map<String, Function<String, ConfirmDialog>> samples = new LinkedHashMap<>();
         samples.put(CONFIRM_DIALOG, this::createConfirmDialog);
         samples.put(CONFIRM_DELETE_DIALOG, this::createConfirmDeleteDialog);
         samples.put(CONFIRM_PUBLISH_DIALOG, this::createConfirmPublishDialog);
@@ -66,7 +68,7 @@ public class Features extends Div {
     }
 
     private ConfirmDialog createUnsavedChangesDialog(String sample) {
-        ConfirmDialog dialog = new ConfirmDialog("Usaved changes",
+        ConfirmDialog dialog = new ConfirmDialog("Unsaved changes",
                 "Do you want to save or discard your changes before navigating away?",
                 "Save", this::onSave, "Discard", this::onDiscard, "Cancel",
                 this::onCancel);
@@ -76,30 +78,37 @@ public class Features extends Div {
 
     private void openSample(ConfirmDialog dialog) {
         status.setText("");
+        eventName.setText("");
         dialog.open();
     }
 
     private void onOK(Object event) {
+        eventName.setText(event.getClass().getSimpleName());
         status.add(new Text("Ok clicked"));
     }
 
     private void onPublish(Object event) {
+        eventName.setText(event.getClass().getSimpleName());
         status.add(new Text("Publish clicked"));
     }
 
     private void onSave(Object event) {
+        eventName.setText(event.getClass().getSimpleName());
         status.add(new Text("Save clicked"));
     }
 
     private void onDelete(Object event) {
+        eventName.setText(event.getClass().getSimpleName());
         status.add(new Text("Delete clicked"));
     }
 
     private void onDiscard(Object event) {
+        eventName.setText(event.getClass().getSimpleName());
         status.add(new Text("Discard clicked"));
     }
 
     private void onCancel(Object event) {
+        eventName.setText(event.getClass().getSimpleName());
         status.add(new Text("Cancel clicked"));
     }
 

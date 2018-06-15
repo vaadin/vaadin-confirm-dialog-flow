@@ -1,9 +1,17 @@
 package com.vaadin.flow.component.confirmdialog.test.hiptest;
 
+import com.vaadin.flow.component.button.testbench.ButtonElement;
+import com.vaadin.flow.component.confirmdialog.ConfirmDialog;
+import com.vaadin.flow.component.dialog.testbench.DialogElement;
+import com.vaadin.flow.component.html.Div;
+import com.vaadin.testbench.ElementQuery;
+import com.vaadin.testbench.TestBenchElement;
 import org.junit.Assert;
 
 import com.vaadin.flow.component.confirmdialog.examples.Features;
 import com.vaadin.flow.component.confirmdialog.test.AbstractParallelTest;
+
+import java.util.Optional;
 
 public class Actionwords {
 
@@ -13,24 +21,33 @@ public class Actionwords {
         this.test = test;
     }
 
+    Optional<ConfirmDialogElement> getConfirmDialog() {
+        ElementQuery<ConfirmDialogElement> query =  test.$(ConfirmDialogElement.class).onPage();
+        return query.exists() ? Optional.of(query.first()) : Optional.empty();
+    }
+
+    String getEventName() {
+        return test.$(TestBenchElement.class).id("eventName").getText();
+    }
+
     public void iClickConfirm() {
-        Assert.fail("Not implemented yet");
+        getConfirmDialog().get().getConfirmButton().click();
     }
 
     public void confirmEventIsFired() {
-        Assert.fail("Not implemented yet");
+        checkFiredEventName(ConfirmDialog.ConfirmDialogConfirmEvent.class);
     }
 
     public void iOpenDialogDialog(String dialog) {
-        Assert.fail("Not implemented yet");
+        test.$(ButtonElement.class).id(dialog).click();
     }
 
-    public void iCompareTheDialogToReferenceImage(String dialog) {
-        Assert.fail("Not implemented yet");
+    public void iCompareTheDialogToReferenceImage(String dialog) throws Exception {
+        test.compareScreen(dialog + "opened");
     }
 
     public void dialogDialogIsClosed(String dialog) {
-        Assert.fail("Not implemented yet");
+        Assert.assertFalse(getConfirmDialog().isPresent());
     }
 
     public void iHaveSampleDialog(String dialog) {
@@ -38,18 +55,22 @@ public class Actionwords {
     }
 
     public void iClickCancel() {
-        Assert.fail("Not implemented yet");
+        getConfirmDialog().get().getCancelButton().click();
     }
 
     public void cancelEventIsFired() {
-        Assert.fail("Not implemented yet");
+        checkFiredEventName(ConfirmDialog.ConfirmDialogCancelEvent.class);
     }
 
     public void iClickReject() {
-        Assert.fail("Not implemented yet");
+        getConfirmDialog().get().getRejectButton().click();
     }
 
     public void rejectEventIsFired() {
-        Assert.fail("Not implemented yet");
+        checkFiredEventName(ConfirmDialog.ConfirmDialogRejectEvent.class);
+    }
+
+    private void checkFiredEventName(Class eventClass) {
+        Assert.assertEquals(eventClass.getSimpleName(), getEventName());
     }
 }
