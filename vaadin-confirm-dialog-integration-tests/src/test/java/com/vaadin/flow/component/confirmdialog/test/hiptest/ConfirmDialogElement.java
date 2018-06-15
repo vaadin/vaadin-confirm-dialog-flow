@@ -12,15 +12,28 @@ public class ConfirmDialogElement extends TestBenchElement {
 		return $(DialogElement.class).first();
 	}
 
+	private TestBenchElement getOverlayContext() {
+		return $("vaadin-dialog-overlay").onPage().first().$("div").id("content");
+	}
+
+	private ButtonElement getButton(String defaultId, String diyId) {
+		ButtonElement button = getOverlayContext().$(ButtonElement.class).id(defaultId);
+		if (button.isDisplayed()) {
+			return button;
+		}
+		return  getOverlayContext().$(ButtonElement.class).id(diyId);
+	}
+
+
 	public ButtonElement getConfirmButton() {
-		return getDialog().$(ButtonElement.class).id("confirm");
+		return getButton("confirm", "confirmDiy");
 	}
 
 	public ButtonElement getRejectButton() {
-		return getDialog().$(ButtonElement.class).id("reject");
+		return getButton("reject", "rejectDiy");
 	}
 
 	public ButtonElement getCancelButton() {
-		return getDialog().$(ButtonElement.class).id("cancel");
+		return getButton("cancel", "cancelDiy");
 	}
 }

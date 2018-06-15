@@ -2,6 +2,7 @@ package com.vaadin.flow.component.confirmdialog.test.hiptest;
 
 import com.vaadin.flow.component.button.testbench.ButtonElement;
 import com.vaadin.flow.component.confirmdialog.ConfirmDialog;
+import com.vaadin.flow.component.confirmdialog.examples.FeaturesDiy;
 import com.vaadin.flow.component.dialog.testbench.DialogElement;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.testbench.ElementQuery;
@@ -16,9 +17,16 @@ import java.util.Optional;
 public class Actionwords {
 
     private final AbstractParallelTest test;
+    private final Class testView;
 
     public Actionwords(AbstractParallelTest test) {
         this.test = test;
+        this.testView = Features.class;
+    }
+
+    public Actionwords(AbstractParallelTest test, Class testView) {
+        this.test = test;
+        this.testView = testView;
     }
 
     Optional<ConfirmDialogElement> getConfirmDialog() {
@@ -51,7 +59,7 @@ public class Actionwords {
     }
 
     public void iHaveSampleDialog(String dialog) {
-        test.open(Features.class, AbstractParallelTest.WINDOW_SIZE_MEDIUM);
+        test.open(testView, AbstractParallelTest.WINDOW_SIZE_MEDIUM);
     }
 
     public void iClickCancel() {

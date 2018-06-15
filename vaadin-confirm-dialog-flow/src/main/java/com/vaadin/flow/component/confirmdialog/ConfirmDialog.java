@@ -147,7 +147,6 @@ public class ConfirmDialog extends Component
     }
 
     public void setCancelButton(Element element) {
-        setCancelable(true);
         addToSlot("cancel-button", element);
     }
 
