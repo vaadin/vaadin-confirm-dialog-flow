@@ -29,6 +29,7 @@ import com.vaadin.flow.component.Synchronize;
 import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.dependency.HtmlImport;
+import com.vaadin.flow.dom.Element;
 import com.vaadin.flow.shared.Registration;
 
 @Tag("vaadin-confirm-dialog")
@@ -127,6 +128,10 @@ public class ConfirmDialog extends Component
         setRejectButtonTheme(theme);
     }
 
+    public void setRejectButton(Element element) {
+        addToSlot("reject-button", element);
+    }
+
     public void setCancelButton(String buttonText,
             ComponentEventListener<ConfirmDialogCancelEvent> cancelListener) {
         setCancelable(true);
@@ -139,6 +144,10 @@ public class ConfirmDialog extends Component
             String theme) {
         setCancelButton(buttonText, cancelListener);
         setCancelButtonTheme(theme);
+    }
+
+    public void setCancelButton(Element element) {
+        addToSlot("cancel-button", element);
     }
 
     public void setConfirmButton(String buttonText,
@@ -155,8 +164,21 @@ public class ConfirmDialog extends Component
         setConfirmButtonTheme(theme);
     }
 
+    public void setConfirmButton(Element element) {
+        addToSlot("confirm-button", element);
+    }
+
+    private void addToSlot(String slotName, Element element) {
+        element.setAttribute("slot", slotName);
+        getElement().appendChild(element);
+    }
+
     public void setText(String message) {
         getElement().setProperty("message", message);
+    }
+
+    public void setText(Element element) {
+        addToSlot("message", element);
     }
 
     public void setConfirmText(String confirmText) {
@@ -209,6 +231,10 @@ public class ConfirmDialog extends Component
 
     public void setHeader(String header) {
         getElement().setProperty("header", header);
+    }
+
+    public void setHeader(Element element) {
+        addToSlot("header", element);
     }
 
     public void open() {
