@@ -8,10 +8,6 @@ import com.vaadin.testbench.elementsbase.Element;
 @Element("vaadin-confirm-dialog")
 public class ConfirmDialogElement extends TestBenchElement {
 
-	private DialogElement getDialog() {
-		return $(DialogElement.class).first();
-	}
-
 	private TestBenchElement getOverlayContext() {
 		return $("vaadin-dialog-overlay").onPage().first().$("div").id("content");
 	}

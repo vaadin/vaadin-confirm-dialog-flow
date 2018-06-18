@@ -2,9 +2,6 @@ package com.vaadin.flow.component.confirmdialog.test.hiptest;
 
 import com.vaadin.flow.component.button.testbench.ButtonElement;
 import com.vaadin.flow.component.confirmdialog.ConfirmDialog;
-import com.vaadin.flow.component.confirmdialog.examples.FeaturesDiy;
-import com.vaadin.flow.component.dialog.testbench.DialogElement;
-import com.vaadin.flow.component.html.Div;
 import com.vaadin.testbench.ElementQuery;
 import com.vaadin.testbench.TestBenchElement;
 import org.junit.Assert;
@@ -43,7 +40,7 @@ public class Actionwords {
     }
 
     public void confirmEventIsFired() {
-        checkFiredEventName(ConfirmDialog.ConfirmDialogConfirmEvent.class);
+        checkFiredEventName(ConfirmDialog.ConfirmEvent.class);
     }
 
     public void iOpenDialogDialog(String dialog) {
@@ -67,7 +64,7 @@ public class Actionwords {
     }
 
     public void cancelEventIsFired() {
-        checkFiredEventName(ConfirmDialog.ConfirmDialogCancelEvent.class);
+        checkFiredEventName(ConfirmDialog.CancelEvent.class);
     }
 
     public void iClickReject() {
@@ -75,7 +72,7 @@ public class Actionwords {
     }
 
     public void rejectEventIsFired() {
-        checkFiredEventName(ConfirmDialog.ConfirmDialogRejectEvent.class);
+        checkFiredEventName(ConfirmDialog.RejectEvent.class);
     }
 
     private void checkFiredEventName(Class eventClass) {

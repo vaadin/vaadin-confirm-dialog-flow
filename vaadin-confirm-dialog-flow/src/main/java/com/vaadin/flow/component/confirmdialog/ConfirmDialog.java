@@ -38,28 +38,22 @@ public class ConfirmDialog extends Component
         implements HasSize, HasStyle, HasOrderedComponents<ConfirmDialog> {
 
     @DomEvent("confirm")
-    public static class ConfirmDialogConfirmEvent
-            extends ComponentEvent<ConfirmDialog> {
-        public ConfirmDialogConfirmEvent(ConfirmDialog source,
-                boolean fromClient) {
+    public static class ConfirmEvent extends ComponentEvent<ConfirmDialog> {
+        public ConfirmEvent(ConfirmDialog source, boolean fromClient) {
             super(source, fromClient);
         }
     }
 
     @DomEvent("reject")
-    public static class ConfirmDialogRejectEvent
-            extends ComponentEvent<ConfirmDialog> {
-        public ConfirmDialogRejectEvent(ConfirmDialog source,
-                boolean fromClient) {
+    public static class RejectEvent extends ComponentEvent<ConfirmDialog> {
+        public RejectEvent(ConfirmDialog source, boolean fromClient) {
             super(source, fromClient);
         }
     }
 
     @DomEvent("cancel")
-    public static class ConfirmDialogCancelEvent
-            extends ComponentEvent<ConfirmDialog> {
-        public ConfirmDialogCancelEvent(ConfirmDialog source,
-                boolean fromClient) {
+    public static class CancelEvent extends ComponentEvent<ConfirmDialog> {
+        public CancelEvent(ConfirmDialog source, boolean fromClient) {
             super(source, fromClient);
         }
     }
@@ -76,7 +70,7 @@ public class ConfirmDialog extends Component
     }
 
     public ConfirmDialog(String header, String text, String confirmText,
-            ComponentEventListener<ConfirmDialogConfirmEvent> confirmListener) {
+            ComponentEventListener<ConfirmEvent> confirmListener) {
         this();
         setHeader(header);
         setText(text);
@@ -84,19 +78,19 @@ public class ConfirmDialog extends Component
     }
 
     public ConfirmDialog(String header, String text, String confirmText,
-            ComponentEventListener<ConfirmDialogConfirmEvent> confirmListener,
+            ComponentEventListener<ConfirmEvent> confirmListener,
             String cancelText,
-            ComponentEventListener<ConfirmDialogCancelEvent> cancelListener) {
+            ComponentEventListener<CancelEvent> cancelListener) {
         this(header, text, confirmText, confirmListener);
         setCancelButton(cancelText, cancelListener);
     }
 
     public ConfirmDialog(String header, String text, String confirmText,
-            ComponentEventListener<ConfirmDialogConfirmEvent> confirmListener,
+            ComponentEventListener<ConfirmEvent> confirmListener,
             String rejectText,
-            ComponentEventListener<ConfirmDialogRejectEvent> rejectListener,
+            ComponentEventListener<RejectEvent> rejectListener,
             String cancelText,
-            ComponentEventListener<ConfirmDialogCancelEvent> cancelListener) {
+            ComponentEventListener<CancelEvent> cancelListener) {
         this(header, text, confirmText, confirmListener, cancelText,
                 cancelListener);
         setRejectButton(rejectText, rejectListener);
@@ -115,14 +109,14 @@ public class ConfirmDialog extends Component
     }
 
     public void setRejectButton(String buttonText,
-            ComponentEventListener<ConfirmDialogRejectEvent> rejectListener) {
+            ComponentEventListener<RejectEvent> rejectListener) {
         setRejectable(true);
         setRejectText(buttonText);
         addRejectListener(rejectListener);
     }
 
     public void setRejectButton(String buttonText,
-            ComponentEventListener<ConfirmDialogRejectEvent> rejectListener,
+            ComponentEventListener<RejectEvent> rejectListener,
             String theme) {
         setRejectButton(buttonText, rejectListener);
         setRejectButtonTheme(theme);
@@ -133,14 +127,14 @@ public class ConfirmDialog extends Component
     }
 
     public void setCancelButton(String buttonText,
-            ComponentEventListener<ConfirmDialogCancelEvent> cancelListener) {
+            ComponentEventListener<CancelEvent> cancelListener) {
         setCancelable(true);
         setCancelText(buttonText);
         addCancelListener(cancelListener);
     }
 
     public void setCancelButton(String buttonText,
-            ComponentEventListener<ConfirmDialogCancelEvent> cancelListener,
+            ComponentEventListener<CancelEvent> cancelListener,
             String theme) {
         setCancelButton(buttonText, cancelListener);
         setCancelButtonTheme(theme);
@@ -151,14 +145,14 @@ public class ConfirmDialog extends Component
     }
 
     public void setConfirmButton(String buttonText,
-            ComponentEventListener<ConfirmDialogConfirmEvent> confirmListener) {
+            ComponentEventListener<ConfirmEvent> confirmListener) {
         setConfirmable(true);
         setConfirmText(buttonText);
         addConfirmListener(confirmListener);
     }
 
     public void setConfirmButton(String buttonText,
-            ComponentEventListener<ConfirmDialogConfirmEvent> confirmListener,
+            ComponentEventListener<ConfirmEvent> confirmListener,
             String theme) {
         setConfirmButton(buttonText, confirmListener);
         setConfirmButtonTheme(theme);
@@ -191,9 +185,9 @@ public class ConfirmDialog extends Component
     }
 
     Registration addConfirmListener(
-            ComponentEventListener<ConfirmDialogConfirmEvent> listener) {
+            ComponentEventListener<ConfirmEvent> listener) {
         return ComponentUtil.addListener((Component) this,
-                ConfirmDialogConfirmEvent.class,
+                ConfirmEvent.class,
                 (ComponentEventListener) listener);
     }
 
@@ -207,9 +201,9 @@ public class ConfirmDialog extends Component
     }
 
     Registration addCancelListener(
-            ComponentEventListener<ConfirmDialogCancelEvent> listener) {
+            ComponentEventListener<CancelEvent> listener) {
         return ComponentUtil.addListener((Component) this,
-                ConfirmDialogCancelEvent.class,
+                CancelEvent.class,
                 (ComponentEventListener) listener);
     }
 
@@ -223,9 +217,9 @@ public class ConfirmDialog extends Component
     }
 
     Registration addRejectListener(
-            ComponentEventListener<ConfirmDialogRejectEvent> listener) {
+            ComponentEventListener<RejectEvent> listener) {
         return ComponentUtil.addListener((Component) this,
-                ConfirmDialogRejectEvent.class,
+                RejectEvent.class,
                 (ComponentEventListener) listener);
     }
 

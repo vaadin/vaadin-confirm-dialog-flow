@@ -24,7 +24,7 @@ public class FeaturesDiy extends Features {
         confirmButton.setId("confirmDiy");
         confirmButton.setIcon(VaadinIcon.CALENDAR.create());
         confirmButton.addClickListener(e -> {
-            this.onOK(new ConfirmDialog.ConfirmDialogConfirmEvent(dialog, false));
+            this.onOK(new ConfirmDialog.ConfirmEvent(dialog, false));
             dialog.close();
         });
         dialog.setConfirmButton(confirmButton.getElement());
@@ -45,7 +45,7 @@ public class FeaturesDiy extends Features {
         deleteButton.setIconAfterText(true);
         deleteButton.setIcon(VaadinIcon.TRASH.create());
         deleteButton.addClickListener(e -> {
-            this.onDelete(new ConfirmDialog.ConfirmDialogConfirmEvent(dialog, false));
+            this.onDelete(new ConfirmDialog.ConfirmEvent(dialog, false));
             dialog.close();
         });
         deleteButton.getElement().setAttribute("theme", "error primary");
@@ -65,14 +65,14 @@ public class FeaturesDiy extends Features {
         publishButton.setId("confirmDiy");
         publishButton.getElement().setAttribute("theme", "primary");
         publishButton.addClickListener(e -> {
-            this.onPublish(new ConfirmDialog.ConfirmDialogConfirmEvent(dialog, false));
+            this.onPublish(new ConfirmDialog.ConfirmEvent(dialog, false));
             dialog.close();
         });
         dialog.setConfirmButton(publishButton.getElement());
         Button cancelButton = new Button("Cancel");
         cancelButton.setId("cancelDiy");
         cancelButton.addClickListener(e -> {
-            this.onCancel(new ConfirmDialog.ConfirmDialogCancelEvent(dialog, false));
+            this.onCancel(new ConfirmDialog.CancelEvent(dialog, false));
             dialog.close();
         });
         cancelButton.getElement().setAttribute("theme", "tertiary");
@@ -93,7 +93,7 @@ public class FeaturesDiy extends Features {
         Button saveButton = new Button("Save");
         saveButton.setId("confirmDiy");
         saveButton.addClickListener(e -> {
-            this.onSave(new ConfirmDialog.ConfirmDialogConfirmEvent(dialog, false));
+            this.onSave(new ConfirmDialog.ConfirmEvent(dialog, false));
             dialog.close();
         });
         saveButton.getElement().setAttribute("theme", "primary");
@@ -102,7 +102,7 @@ public class FeaturesDiy extends Features {
         Button discardButton = new Button("Discard");
         discardButton.setId("rejectDiy");
         discardButton.addClickListener(e -> {
-            this.onDiscard(new ConfirmDialog.ConfirmDialogRejectEvent(dialog, false));
+            this.onDiscard(new ConfirmDialog.RejectEvent(dialog, false));
             dialog.close();
         });
         discardButton.getElement().setAttribute("theme", "error tertiary");
@@ -111,7 +111,7 @@ public class FeaturesDiy extends Features {
         Button cancelButton = new Button("Cancel");
         cancelButton.setId("cancelDiy");
         cancelButton.addClickListener(e -> {
-            this.onCancel(new ConfirmDialog.ConfirmDialogCancelEvent(dialog, false));
+            this.onCancel(new ConfirmDialog.CancelEvent(dialog, false));
             dialog.close();
         });
         cancelButton.getElement().setAttribute("theme", "tertiary");
