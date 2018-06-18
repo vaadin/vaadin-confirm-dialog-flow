@@ -1,21 +1,25 @@
-package com.vaadin.flow.component.confirmdialog.test.hiptest;
+package com.vaadin.flow.component.confirmdialog.test;
 
 import com.vaadin.flow.component.button.testbench.ButtonElement;
-import com.vaadin.flow.component.dialog.testbench.DialogElement;
 import com.vaadin.testbench.TestBenchElement;
 import com.vaadin.testbench.elementsbase.Element;
+import org.openqa.selenium.StaleElementReferenceException;
 
 @Element("vaadin-confirm-dialog")
 public class ConfirmDialogElement extends TestBenchElement {
 
 	private TestBenchElement getOverlayContext() {
-		return $("vaadin-dialog-overlay").onPage().first().$("div").id("content");
+		return $("vaadin-dialog-overlay").onPage().first().$(TestBenchElement.class).id("content");
 	}
 
 	private ButtonElement getButton(String defaultId, String diyId) {
-		ButtonElement button = getOverlayContext().$(ButtonElement.class).id(defaultId);
-		if (button.isDisplayed()) {
-			return button;
+		try {
+			ButtonElement button = getOverlayContext().$(ButtonElement.class).id(defaultId);
+			if (button.isDisplayed()) {
+				return button;
+			}
+		} catch (StaleElementReferenceException e) {
+			//NOOP
 		}
 		return  getOverlayContext().$(ButtonElement.class).id(diyId);
 	}

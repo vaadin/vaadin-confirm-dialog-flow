@@ -2,6 +2,7 @@ package com.vaadin.flow.component.confirmdialog.test.hiptest;
 
 import com.vaadin.flow.component.button.testbench.ButtonElement;
 import com.vaadin.flow.component.confirmdialog.ConfirmDialog;
+import com.vaadin.flow.component.confirmdialog.test.ConfirmDialogElement;
 import com.vaadin.testbench.ElementQuery;
 import com.vaadin.testbench.TestBenchElement;
 import org.junit.Assert;
