@@ -3,7 +3,7 @@ package com.vaadin.flow.component.confirmdialog.test;
 import com.vaadin.flow.component.button.testbench.ButtonElement;
 import com.vaadin.testbench.TestBenchElement;
 import com.vaadin.testbench.elementsbase.Element;
-import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.WebDriverException;
 
 @Element("vaadin-confirm-dialog")
 public class ConfirmDialogElement extends TestBenchElement {
@@ -15,10 +15,10 @@ public class ConfirmDialogElement extends TestBenchElement {
 	private ButtonElement getButton(String defaultId, String diyId) {
 		try {
 			ButtonElement button = getOverlayContext().$(ButtonElement.class).id(defaultId);
-			if (button.isDisplayed()) {
+			if (button.getLocation().getY() != 0) {
 				return button;
 			}
-		} catch (StaleElementReferenceException e) {
+		} catch (WebDriverException e) {
 			//NOOP
 		}
 		return  getOverlayContext().$(ButtonElement.class).id(diyId);
