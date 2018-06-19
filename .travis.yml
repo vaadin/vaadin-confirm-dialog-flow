@@ -7,7 +7,7 @@ before_install:
   - gem install hiptest-publisher
   - sh generateHiptestTests.sh $HIPTEST_SECRET $HIPTEST_TEST_RUN
   - echo "sauce.user=$SAUCE_USER" > local.properties && echo "sauce.sauceAccessKey=$SAUCE_ACCESSKEY" >> local.properties
-script: mvn -B verify -Dvaadin.proKey=$VAADIN_PRO_KEY -Dvaadin.productionMode
+script: mvn -B verify -Dvaadin.proKey=$VAADIN_PRO_KEY -Dvaadin.productionMode -Dcom.vaadin.testbench.Parameters.testsInParallel=2
 after_script:
   - sh publishHiptestResults.sh $HIPTEST_SECRET $HIPTEST_TEST_RUN
 #deploy:
