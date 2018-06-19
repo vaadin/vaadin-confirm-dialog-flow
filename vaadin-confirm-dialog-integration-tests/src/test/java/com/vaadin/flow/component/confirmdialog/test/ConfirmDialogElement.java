@@ -1,9 +1,9 @@
 package com.vaadin.flow.component.confirmdialog.test;
 
 import com.vaadin.flow.component.button.testbench.ButtonElement;
+import com.vaadin.testbench.ElementQuery;
 import com.vaadin.testbench.TestBenchElement;
 import com.vaadin.testbench.elementsbase.Element;
-import org.openqa.selenium.WebDriverException;
 
 @Element("vaadin-confirm-dialog")
 public class ConfirmDialogElement extends TestBenchElement {
@@ -12,28 +12,25 @@ public class ConfirmDialogElement extends TestBenchElement {
 		return $("vaadin-dialog-overlay").onPage().first().$(TestBenchElement.class).id("content");
 	}
 
-	private ButtonElement getButton(String defaultId, String diyId) {
-		try {
-			ButtonElement button = getOverlayContext().$(ButtonElement.class).id(defaultId);
-			if (button.getLocation().getY() != 0) {
-				return button;
-			}
-		} catch (WebDriverException e) {
-			//NOOP
+	private TestBenchElement getButton(String buttonId, String slotName) {
+		ElementQuery<TestBenchElement> query = getOverlayContext().$(TestBenchElement.class)
+				.attribute("slot", slotName);
+		if (query.exists()) {
+			return query.first();
 		}
-		return  getOverlayContext().$(ButtonElement.class).id(diyId);
+
+		return getOverlayContext().$(ButtonElement.class).id(buttonId);
 	}
 
-
-	public ButtonElement getConfirmButton() {
-		return getButton("confirm", "confirmDiy");
+	public TestBenchElement getConfirmButton() {
+		return getButton("confirm", "confirm-button");
 	}
 
-	public ButtonElement getRejectButton() {
-		return getButton("reject", "rejectDiy");
+	public TestBenchElement getRejectButton() {
+		return getButton("reject", "reject-button");
 	}
 
-	public ButtonElement getCancelButton() {
-		return getButton("cancel", "cancelDiy");
+	public TestBenchElement getCancelButton() {
+		return getButton("cancel", "cancel-button");
 	}
 }
