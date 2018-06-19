@@ -184,11 +184,9 @@ public class ConfirmDialog extends Component
         getElement().setProperty("confirmTheme", confirmTheme);
     }
 
-    Registration addConfirmListener(
+    public Registration addConfirmListener(
             ComponentEventListener<ConfirmEvent> listener) {
-        return ComponentUtil.addListener((Component) this,
-                ConfirmEvent.class,
-                (ComponentEventListener) listener);
+        return ComponentUtil.addListener(this, ConfirmEvent.class, listener);
     }
 
     public void setCancelText(String cancelText) {
@@ -200,11 +198,9 @@ public class ConfirmDialog extends Component
         getElement().setProperty("cancelTheme", cancelTheme);
     }
 
-    Registration addCancelListener(
+    public Registration addCancelListener(
             ComponentEventListener<CancelEvent> listener) {
-        return ComponentUtil.addListener((Component) this,
-                CancelEvent.class,
-                (ComponentEventListener) listener);
+        return ComponentUtil.addListener(this, CancelEvent.class, listener);
     }
 
     public void setRejectText(String rejectText) {
@@ -216,11 +212,9 @@ public class ConfirmDialog extends Component
         getElement().setProperty("rejectTheme", rejectTheme);
     }
 
-    Registration addRejectListener(
+    public Registration addRejectListener(
             ComponentEventListener<RejectEvent> listener) {
-        return ComponentUtil.addListener((Component) this,
-                RejectEvent.class,
-                (ComponentEventListener) listener);
+        return ComponentUtil.addListener(this, RejectEvent.class, listener);
     }
 
     public void setHeader(String header) {
