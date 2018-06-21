@@ -1,8 +1,8 @@
 package com.vaadin.flow.component.confirmdialog.vaadincom;
 
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.confirmdialog.ConfirmDialog;
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.demo.DemoView;
 import com.vaadin.flow.router.Route;
 
@@ -11,16 +11,20 @@ public class ConfirmDialogView extends DemoView {
 
     @Override
     protected void initView() {
-        meetingStartingAlert();
-        confirmDeleteDialog();
-        confirmPublishDialog();
         unsavedChangesDialog();
+        confirmPublishDialog();
+        confirmDeleteDialog();
+        meetingStartingAlert();
     }
 
     private void createCard(String heading, String buttonText, ConfirmDialog dialog) {
+        Div messageDiv = createMessageDiv();
         Button button = new Button(buttonText);
         button.addClickListener(event -> dialog.open());
-        addCard(heading, button);
+        dialog.addConfirmListener(event -> messageDiv.setText("Confirmed"));
+        dialog.addRejectListener(event -> messageDiv.setText("Rejected"));
+        dialog.addCancelListener(event -> messageDiv.setText("Cancelled"));
+        addCard(heading, button, messageDiv);
     }
 
     private void meetingStartingAlert() {
@@ -76,41 +80,27 @@ public class ConfirmDialogView extends DemoView {
         createCard("Save or Discard Dialog Example", "Close", dialog);
     }
 
-    // @formatter:off
-    // begin-source-example
-    // source-example-heading: Basic Alert Dialog Example
-    private void showNotification(String buttonPressed, Object eventGenerated) {
-        Notification notification = new Notification(buttonPressed + " button was pressed and "
-                + eventGenerated.getClass().getSimpleName()
-                + " event was fired", 3000,
-                Notification.Position.MIDDLE);
-        notification.open();
+    private void onOK(ConfirmDialog.ConfirmEvent event) {
     }
 
-    private void onOK(Object event) {
-        showNotification("OK", event);
-    }
-    // end-source-example
-    // @formatter:on
-
-    private void onPublish(Object event) {
-        showNotification("Publish", event);
+    private void onPublish(ConfirmDialog.ConfirmEvent event) {
     }
 
-    private void onSave(Object event) {
-        showNotification("Save", event);
+    private void onSave(ConfirmDialog.ConfirmEvent event) {
     }
 
-    private void onDiscard(Object event) {
-        showNotification("Discard", event);
+    private void onDiscard(ConfirmDialog.RejectEvent event) {
     }
 
-    private void onDelete(Object event) {
-        showNotification("Delete", event);
+    private void onDelete(ConfirmDialog.ConfirmEvent event) {
     }
 
-    private void onCancel(Object event) {
-        showNotification("Cancel", event);
+    private void onCancel(ConfirmDialog.CancelEvent event) {
     }
 
+    private Div createMessageDiv() {
+        Div message = new Div();
+        message.getStyle().set("whiteSpace", "pre");
+        return message;
+    }
 }
