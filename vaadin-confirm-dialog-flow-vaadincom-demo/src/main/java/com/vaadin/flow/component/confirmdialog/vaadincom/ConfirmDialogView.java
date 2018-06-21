@@ -36,7 +36,7 @@ public class ConfirmDialogView extends DemoView {
         // end-source-example
         // @formatter:on
 
-        createCard("Basic Alert Dialog Example", "Show alert", dialog);
+        createCard("Basic Alert Dialog Example", "Open dialog", dialog);
     }
 
     private void confirmDeleteDialog() {
@@ -50,7 +50,7 @@ public class ConfirmDialogView extends DemoView {
         // end-source-example
         // @formatter:on
 
-        createCard("Confirm Delete Dialog Example", "Delete item", dialog);
+        createCard("Confirm Delete Dialog Example", "Open dialog", dialog);
     }
 
     private void confirmPublishDialog() {
@@ -63,7 +63,7 @@ public class ConfirmDialogView extends DemoView {
         // end-source-example
         // @formatter:on
 
-        createCard("Confirmation Dialog Example", "Publish", dialog);
+        createCard("Confirmation Dialog Example", "Open dialog", dialog);
     }
 
     private void unsavedChangesDialog() {
@@ -77,7 +77,7 @@ public class ConfirmDialogView extends DemoView {
         // end-source-example
         // @formatter:on
 
-        createCard("Save or Discard Dialog Example", "Close", dialog);
+        createCard("Save or Discard Dialog Example", "Open dialog", dialog);
     }
 
     private void onOK(ConfirmDialog.ConfirmEvent event) {
