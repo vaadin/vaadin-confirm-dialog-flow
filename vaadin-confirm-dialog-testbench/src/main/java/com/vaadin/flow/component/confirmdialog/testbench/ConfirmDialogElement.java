@@ -26,7 +26,7 @@ import com.vaadin.testbench.elementsbase.Element;
 public class ConfirmDialogElement extends TestBenchElement {
 
     private TestBenchElement getOverlayContext() {
-        return $("vaadin-dialog-overlay").onPage().first().$(TestBenchElement.class).id("content");
+        return $("vaadin-dialog-overlay").onPage().last().$(TestBenchElement.class).id("content");
     }
 
     private TestBenchElement getButton(String buttonId, String slotName) {
@@ -49,5 +49,15 @@ public class ConfirmDialogElement extends TestBenchElement {
 
     public TestBenchElement getCancelButton() {
         return getButton("cancel", "cancel-button");
+    }
+
+    public String getMessageText() {
+        return getOverlayContext().$(TestBenchElement.class)
+                .attribute("part", "message").first().getText();
+    }
+
+    public String getHeaderText() {
+        return getOverlayContext().$(TestBenchElement.class)
+                .attribute("part", "header").first().getText();
     }
 }
