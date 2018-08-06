@@ -32,11 +32,19 @@ import com.vaadin.flow.component.dependency.HtmlImport;
 import com.vaadin.flow.dom.Element;
 import com.vaadin.flow.shared.Registration;
 
+/**
+ * Server-side component for the {@code <vaadin-confirm-dialog>} element.
+ * 
+ * @author Vaadin Ltd
+ */
 @Tag("vaadin-confirm-dialog")
 @HtmlImport("frontend://bower_components/vaadin-confirm-dialog/src/vaadin-confirm-dialog.html")
 public class ConfirmDialog extends Component
         implements HasSize, HasStyle, HasOrderedComponents<ConfirmDialog> {
 
+    /**
+     * `confirm` is sent when the user clicks Confirm button
+     */
     @DomEvent("confirm")
     public static class ConfirmEvent extends ComponentEvent<ConfirmDialog> {
         public ConfirmEvent(ConfirmDialog source, boolean fromClient) {
@@ -44,6 +52,9 @@ public class ConfirmDialog extends Component
         }
     }
 
+    /**
+     * `reject` is sent when the user clicks Reject button
+     */
     @DomEvent("reject")
     public static class RejectEvent extends ComponentEvent<ConfirmDialog> {
         public RejectEvent(ConfirmDialog source, boolean fromClient) {
@@ -51,6 +62,11 @@ public class ConfirmDialog extends Component
         }
     }
 
+    /**
+     * `cancel` is sent when the user clicks Cancel button
+     * or presses Escape key. `cancel` is not sent if Cancel
+     * button is hidden
+     */
     @DomEvent("cancel")
     public static class CancelEvent extends ComponentEvent<ConfirmDialog> {
         public CancelEvent(ConfirmDialog source, boolean fromClient) {
@@ -60,6 +76,9 @@ public class ConfirmDialog extends Component
 
     private boolean autoAddedToTheUi;
 
+    /**
+     * Creates an empty dialog with a Confirm button
+     */
     public ConfirmDialog() {
         getElement().addEventListener("opened-changed", event -> {
             if (autoAddedToTheUi && !isOpened()) {
@@ -69,6 +88,10 @@ public class ConfirmDialog extends Component
         });
     }
 
+    /**
+     * Creates a dialog with a Confirm button with its click listener
+     * and a given texts
+     */
     public ConfirmDialog(String header, String text, String confirmText,
             ComponentEventListener<ConfirmEvent> confirmListener) {
         this();
@@ -77,6 +100,9 @@ public class ConfirmDialog extends Component
         setConfirmButton(confirmText, confirmListener);
     }
 
+    /**
+     * Creates a two button dialog with Confirm and Cancel buttons
+     */
     public ConfirmDialog(String header, String text, String confirmText,
             ComponentEventListener<ConfirmEvent> confirmListener,
             String cancelText,
@@ -85,6 +111,9 @@ public class ConfirmDialog extends Component
         setCancelButton(cancelText, cancelListener);
     }
 
+    /**
+     * Creates a three button dialog with Confirm, Reject and Cancel buttons
+     */
     public ConfirmDialog(String header, String text, String confirmText,
             ComponentEventListener<ConfirmEvent> confirmListener,
             String rejectText,
@@ -118,6 +147,9 @@ public class ConfirmDialog extends Component
         setRejectButtonTheme(theme);
     }
 
+    /**
+     * Sets custom reject button
+     */
     public void setRejectButton(Element element) {
         addToSlot("reject-button", element);
     }
@@ -136,6 +168,9 @@ public class ConfirmDialog extends Component
         setCancelButtonTheme(theme);
     }
 
+    /**
+     * Sets custom cancel button
+     */
     public void setCancelButton(Element element) {
         addToSlot("cancel-button", element);
     }
@@ -153,6 +188,9 @@ public class ConfirmDialog extends Component
         setConfirmButtonTheme(theme);
     }
 
+    /**
+     * Sets custom confirm button
+     */
     public void setConfirmButton(Element element) {
         addToSlot("confirm-button", element);
     }
@@ -220,10 +258,23 @@ public class ConfirmDialog extends Component
         addToSlot("header", element);
     }
 
+    /**
+     * Opens the dialog.
+     * <p>
+     * Note: You don't need to add the dialog component before opening it,
+     * cause opening a dialog will automatically add it to the {@code <body>}
+     * if it's not yet attached anywhere.
+     */
     public void open() {
         setOpened(true);
     }
 
+    /**
+     * Closes the dialog.
+     * <p>
+     * Note: This method also removes the dialog component from the DOM after
+     * closing it, unless you have added the component manually.
+     */
     public void close() {
         setOpened(false);
     }
@@ -233,6 +284,15 @@ public class ConfirmDialog extends Component
         return getElement().getProperty("opened", false);
     }
 
+    /**
+     * Opens or closes the dialog.
+     * <p>
+     * Note: Confirm-dialog will be attached or detached from the DOM automatically,
+     * if it was not added manually. 
+     *
+     * @param opened
+     *            {@code true} to open the confirm-dialog, {@code false} to close it
+     */
     public void setOpened(boolean opened) {
         if (opened) {
             ensureAttached();
