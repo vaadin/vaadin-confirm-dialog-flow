@@ -11,7 +11,7 @@
 	</parent>
 	<artifactId>vaadin-confirm-dialog-flow-root</artifactId>
 	<packaging>pom</packaging>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.1-SNAPSHOT</version>
 	<name>vaadin-confirm-dialog-root</name>
 	<inceptionYear>2018</inceptionYear>
 	<organization>
@@ -20,8 +20,8 @@
 	</organization>
 
 	<properties>
-		<flow.component.base.version>1.0.6</flow.component.base.version>
-		<flow.version>1.0.3</flow.version>
+		<flow.component.base.version>1.1.0.beta1</flow.component.base.version>
+		<flow.version>1.1.0.beta1</flow.version>
 		<testbench.version>6.0.1</testbench.version>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
