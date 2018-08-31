@@ -24,6 +24,7 @@ after_script:
 branches:
   only:
     - master
+    - /^\d+\.\d+$/
 cache:
   directories:
   - $HOME/.m2

@@ -16,7 +16,7 @@ Add Confirm Dialog to your project:
   <dependency>
     <groupId>com.vaadin</groupId>
     <artifactId>vaadin-confirm-dialog-flow</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
   </dependency>
 </dependencies>
 ```
