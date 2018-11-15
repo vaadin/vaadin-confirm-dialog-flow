@@ -1,5 +1,9 @@
 package com.vaadin.flow.component.confirmdialog.test.hiptest;
 
+import com.vaadin.flow.component.button.testbench.ButtonElement;
+import com.vaadin.flow.component.confirmdialog.examples.Features;
+import com.vaadin.flow.component.confirmdialog.testbench.ConfirmDialogElement;
+import org.junit.Assert;
 import org.junit.Test;
 
 import com.vaadin.flow.component.confirmdialog.test.AbstractParallelTest;
@@ -81,5 +85,19 @@ public class FeaturesIT extends AbstractParallelTest {
     @Test
     public void testUnsavedChangesDialogBasicUid6064e2706c3d4e8993a17c07bcc49f7f() throws Exception {
         unsavedChangesDialog("SampleUnsavedChangesDialog");
+    }
+
+    @Test
+    public void testDialogStrings() {
+        open(Features.class, AbstractParallelTest.WINDOW_SIZE_MEDIUM);
+        $(ButtonElement.class).id("SampleUnsavedChangesDialog").click();
+        ConfirmDialogElement dialog = $(ConfirmDialogElement.class).waitForFirst();
+        // TODO: uncomment when https://github.com/vaadin/vaadin-confirm-dialog-flow/issues/52 fixed
+        // Assert.assertEquals("Unsaved changes", dialog.getHeaderText());
+        Assert.assertEquals("Do you want to save or discard your changes before navigating away?",
+                dialog.getMessageText());
+        Assert.assertEquals("Save", dialog.getConfirmButton().getText());
+        Assert.assertEquals("Discard", dialog.getRejectButton().getText());
+        Assert.assertEquals("Cancel", dialog.getCancelButton().getText());
     }
 }

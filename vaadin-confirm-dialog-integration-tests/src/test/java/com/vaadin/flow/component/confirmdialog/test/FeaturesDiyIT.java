@@ -1,7 +1,10 @@
 package com.vaadin.flow.component.confirmdialog.test;
 
+import com.vaadin.flow.component.button.testbench.ButtonElement;
 import com.vaadin.flow.component.confirmdialog.examples.FeaturesDiy;
 import com.vaadin.flow.component.confirmdialog.test.hiptest.Actionwords;
+import com.vaadin.flow.component.confirmdialog.testbench.ConfirmDialogElement;
+import org.junit.Assert;
 import org.junit.Test;
 
 public class FeaturesDiyIT extends AbstractParallelTest {
@@ -68,4 +71,15 @@ public class FeaturesDiyIT extends AbstractParallelTest {
         actionwords.cancelEventIsFired();
     }
 
+    @Test
+    public void testDialogStrings() {
+        open(FeaturesDiy.class, AbstractParallelTest.WINDOW_SIZE_MEDIUM);
+        $(ButtonElement.class).id("SampleConfirmDialog").click();
+        ConfirmDialogElement dialog = $(ConfirmDialogElement.class).waitForFirst();
+        Assert.assertEquals("Meeting starting", dialog.getHeaderText());
+        Assert.assertEquals("Your next meeting starts in 5 minutes",
+                dialog.getMessageText());
+        Assert.assertEquals("Confirm", dialog.getConfirmButton().getText());
+
+    }
 }
