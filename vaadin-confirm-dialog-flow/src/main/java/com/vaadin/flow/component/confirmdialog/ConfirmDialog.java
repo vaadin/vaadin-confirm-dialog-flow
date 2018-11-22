@@ -22,7 +22,6 @@ import com.vaadin.flow.component.ComponentEvent;
 import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.ComponentUtil;
 import com.vaadin.flow.component.DomEvent;
-import com.vaadin.flow.component.HasElement;
 import com.vaadin.flow.component.HasOrderedComponents;
 import com.vaadin.flow.component.HasSize;
 import com.vaadin.flow.component.HasStyle;
@@ -231,7 +230,7 @@ public class ConfirmDialog extends Component
      * @param component
      *            the component to display instead of default Reject button
      */
-    public void setRejectButton(HasElement component) {
+    public void setRejectButton(Component component) {
         setRejectButton(component.getElement());
     }
 
@@ -285,7 +284,7 @@ public class ConfirmDialog extends Component
      * @param component
      *            the component to display instead of default Cancel button
      */
-    public void setCancelButton(HasElement component) {
+    public void setCancelButton(Component component) {
         setCancelButton(component.getElement());
     }
 
@@ -337,7 +336,7 @@ public class ConfirmDialog extends Component
      * @param component
      *            the element to display instead of default Confirm button
      */
-    public void setConfirmButton(HasElement component) {
+    public void setConfirmButton(Component component) {
         setConfirmButton(component.getElement());
     }
 
@@ -370,7 +369,7 @@ public class ConfirmDialog extends Component
      *            the component to display instead of default 
      *            confirmation text node
      */
-    public void setText(HasElement component) {
+    public void setText(Component component) {
         setText(component.getElement());
     }
 
@@ -466,7 +465,7 @@ public class ConfirmDialog extends Component
      * @param component
      *            the component to display instead of default header text
      */
-    public void setHeader(HasElement component) {
+    public void setHeader(Component component) {
         setHeader(component.getElement());
     }
 
