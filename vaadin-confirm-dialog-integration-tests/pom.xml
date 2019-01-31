@@ -54,12 +54,12 @@
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-button-flow</artifactId>
-            <version>1.2.0</version>
+            <version>${flow.version}</version>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-dialog-flow</artifactId>
-            <version>1.2.0</version>
+            <version>${flow.version}</version>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
@@ -69,7 +69,7 @@
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-icons-flow</artifactId>
-            <version>1.2.0</version>
+            <version>${flow.version}</version>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
@@ -91,7 +91,8 @@
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>${jetty.plugin.version}</version>
-                <configuration>
+                <configuration combine.self="override">
+                    <skip>${skipITs}</skip>
                     <scanIntervalSeconds>2</scanIntervalSeconds>
                     <stopKey>STOP</stopKey>
                     <stopPort>8005</stopPort>
@@ -325,7 +326,7 @@
                         <groupId>com.lazerycode.selenium</groupId>
                         <artifactId>driver-binary-downloader-maven-plugin</artifactId>
                         <version>1.0.17</version>
-                        <configuration>
+                        <configuration combine.self="override">
                             <!-- root directory that downloaded driver binaries will be stored
                                 in -->
                             <onlyGetDriversForHostOperatingSystem>true</onlyGetDriversForHostOperatingSystem>
