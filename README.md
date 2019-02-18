@@ -19,10 +19,12 @@ Add Confirm Dialog to your project:
   <dependency>
     <groupId>com.vaadin</groupId>
     <artifactId>vaadin-confirm-dialog-flow</artifactId>
-    <version>1.0.0</version>
+    <version>${component.version}</version>
   </dependency>
 </dependencies>
 ```
+
+When using `vaadin-bom`, it is not necessary to specify the version.
 
 ### Basic Use
 
