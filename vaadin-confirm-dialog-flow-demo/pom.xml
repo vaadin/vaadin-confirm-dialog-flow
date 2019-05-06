@@ -10,7 +10,7 @@
     </parent>
     <artifactId>vaadin-confirm-dialog-flow-demo</artifactId>
 
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>Vaadin Confirm Dialog Flow Demo</name>
 
     <properties>

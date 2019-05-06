@@ -40,7 +40,7 @@ public class Features extends Div {
             Function<String, ConfirmDialog> creator) {
         Button button = new Button(sample);
         button.setId(sample);
-        // workaround for https://github.com/vaadin/flow/issues/5509
+        // workaround for https://github.com/vaadin/flow/issues/5619
         new Icon();
         button.addClickListener(event -> openSample(creator.apply(sample)));
         add(button);
