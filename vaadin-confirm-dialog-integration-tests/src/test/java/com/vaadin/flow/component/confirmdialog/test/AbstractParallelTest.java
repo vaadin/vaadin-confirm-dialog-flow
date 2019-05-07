@@ -25,6 +25,10 @@ public abstract class AbstractParallelTest extends ParallelTest {
     }
 
     public void compareScreen(String screenshotName) throws Exception {
+        // Screenshots in npm and bower mode differ
+        if (Boolean.getBoolean("vaadin.bowerMode")) {
+            return;
+        }
         String prefix = getClass().getSimpleName().replaceAll("IT", "");
         String referenceName = prefix + "_" + screenshotName;
         Thread.sleep(1000);
