@@ -8,11 +8,10 @@
         <artifactId>vaadin-confirm-dialog-flow-root</artifactId>
         <version>2.0-SNAPSHOT</version>
     </parent>
-    <artifactId>vaadin-confirm-dialog-integration-tests</artifactId>
+    <artifactId>vaadin-confirm-dialog-integration-tests-bower-mode</artifactId>
 
     <packaging>war</packaging>
-    <name>Vaadin Confirm Dialog Integration Tests</name>
-
+    <name>Vaadin Confirm Dialog Integration Tests in Bower</name>
 
     <properties>
         <jetty.plugin.version>9.4.11.v20180605</jetty.plugin.version>
@@ -89,20 +88,6 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>com.vaadin</groupId>
-                <artifactId>flow-maven-plugin</artifactId>
-                <version>${flow.version}</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>validate</goal>
-                            <goal>build-frontend</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>${jetty.plugin.version}</version>
@@ -151,7 +136,7 @@
                             <properties>
                                 <property>
                                     <name>vaadin.bowerMode</name>
-                                    <value>false</value>
+                                    <value>true</value>
                                 </property>
                             </properties>
                         </configuration>
@@ -193,12 +178,13 @@
                     <plugin>
                         <artifactId>maven-failsafe-plugin</artifactId>
                         <configuration>
-                            <trimStackTrace>false</trimStackTrace>
                             <systemPropertyVariables>
                                 <sauce.user>${sauce.user}</sauce.user>
                                 <sauce.sauceAccessKey>${sauce.sauceAccessKey}</sauce.sauceAccessKey>
                                 <sauce.options>${sauce.options}</sauce.options>
+                                <vaadin.bowerMode>true</vaadin.bowerMode>
                             </systemPropertyVariables>
+                            <trimStackTrace>false</trimStackTrace>
                         </configuration>
                     </plugin>
                     <plugin>
@@ -258,6 +244,7 @@
                                 <webdriver.chrome.driver>${webdriver.chrome.driver}</webdriver.chrome.driver>
                                 <webdriver.edge.driver>${webdriver.edge.driver}</webdriver.edge.driver>
                                 <com.vaadin.testbench.Parameters.runLocally>${runLocally}</com.vaadin.testbench.Parameters.runLocally>
+                                <vaadin.bowerMode>true</vaadin.bowerMode>
                             </systemPropertyVariables>
                         </configuration>
                     </plugin>

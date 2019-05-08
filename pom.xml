@@ -32,8 +32,9 @@
 	<modules>
 		<module>vaadin-confirm-dialog-flow</module>
 		<module>vaadin-confirm-dialog-testbench</module>
-		<module>vaadin-confirm-dialog-integration-tests</module>
 		<module>vaadin-confirm-dialog-flow-demo</module>
+		<module>vaadin-confirm-dialog-integration-tests/pom-bower-mode.xml</module>
+		<module>vaadin-confirm-dialog-integration-tests</module>
 	</modules>
 
 	<repositories>
