@@ -1,9 +1,13 @@
 language: java
 jdk: oraclejdk8
 dist: trusty
-before_install:
-  - echo "sauce.user=$SAUCE_USER" > local.properties && echo "sauce.sauceAccessKey=$SAUCE_ACCESSKEY" >> local.properties
-script: mvn -B verify -Dvaadin.proKey=$VAADIN_PRO_KEY -Dvaadin.productionMode -Dcom.vaadin.testbench.Parameters.testsInParallel=2
+
+script: mvn -B clean verify -Dvaadin.productionMode -Dcom.vaadin.testbench.Parameters.testsInParallel=2 -Dvaadin.proKey=$VAADIN_PRO_KEY -Dsauce.user=$SAUCE_USER -Dsauce.sauceAccessKey=$SAUCE_ACCESSKEY -P$IT_PROFILE
+
+env:
+  matrix:
+    - IT_PROFILE=npm-it,!bower-it
+    - IT_PROFILE=bower-it,!npm-it
 
 #deploy:
 #  - provider: script
