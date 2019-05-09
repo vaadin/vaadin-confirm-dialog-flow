@@ -91,89 +91,24 @@
             <plugin>
                 <groupId>com.vaadin</groupId>
                 <artifactId>flow-maven-plugin</artifactId>
-                <version>${flow.version}</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>validate</goal>
-                            <goal>build-frontend</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
 
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
-                <version>${jetty.plugin.version}</version>
                 <configuration combine.self="override">
                     <skip>${skipITs}</skip>
                     <scanIntervalSeconds>2</scanIntervalSeconds>
                     <stopKey>STOP</stopKey>
                     <stopPort>8005</stopPort>
                 </configuration>
-                <executions>
-                    <!-- start and stop jetty (running our app) when running
-                        integration tests -->
-                    <execution>
-                        <id>start-jetty</id>
-                        <phase>pre-integration-test</phase>
-                        <goals>
-                            <goal>deploy-war</goal>
-                        </goals>
-                        <configuration>
-                            <daemon>true</daemon>
-                            <scanIntervalSeconds>0</scanIntervalSeconds>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>stop-jetty</id>
-                        <phase>post-integration-test</phase>
-                        <goals>
-                            <goal>stop</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
 
             <!-- plugins for tests -->
-
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>properties-maven-plugin</artifactId>
-                <version>1.0.0</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>set-system-properties</goal>
-                        </goals>
-                        <configuration>
-                            <properties>
-                                <property>
-                                    <name>vaadin.bowerMode</name>
-                                    <value>false</value>
-                                </property>
-                            </properties>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>read-local-properties-if-present</id>
-                        <phase>initialize</phase>
-                        <goals>
-                            <goal>read-project-properties</goal>
-                        </goals>
-                        <configuration>
-                            <files>
-                                <file>../local.properties</file>
-                            </files>
-                            <quiet>true</quiet>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
             <plugin>
                 <groupId>org.sonatype.plugins</groupId>
                 <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.6.8</version>
                 <configuration>
                     <skipNexusStagingDeployMojo>true</skipNexusStagingDeployMojo>
                 </configuration>
