@@ -78,6 +78,53 @@ public class ConfirmDialog extends Component
         }
     }
 
+    private String height;
+    private String width;
+
+    /**
+     * Sets the width of the component content area.
+     * <p>
+     * The width should be in a format understood by the browser, e.g. "100px"
+     * or "2.5em" (Using relative unit, such as percentage, will lead to unexpected results).
+     * <p>
+     * If the provided {@code width} value is {@literal null} then width is
+     * removed.
+     *
+     * @param width
+     *            the width to set, may be {@code null}
+     */
+    @Override
+    public void setWidth(String width) {
+        this.width = width;
+        updateWidth();
+    }
+
+    private void updateWidth() {
+        this.getElement().executeJs("this._setWidth($0)", this.width);
+    }
+
+    /**
+     * Sets the height of the component content area.
+     * <p>
+     * The height should be in a format understood by the browser, e.g. "100px"
+     * or "2.5em" (Using relative unit, such as percentage, will lead to unexpected results).
+     * <p>
+     * If the provided {@code height} value is {@literal null} then height is
+     * removed.
+     *
+     * @param height
+     *            the height to set, may be {@code null}
+     */
+    @Override
+    public void setHeight(String height) {
+        this.height = height;
+        updateHeight();
+    }
+
+    public void updateHeight() {
+        this.getElement().executeJs("this._setHeight($0)", this.height);
+    }
+
     private boolean autoAddedToTheUi;
 
     /**
@@ -542,6 +589,8 @@ public class ConfirmDialog extends Component
             ui.beforeClientResponse(ui, context -> {
                 ui.add(this);
                 autoAddedToTheUi = true;
+                updateWidth();
+                updateHeight();
             });
         }
     }

@@ -8,6 +8,7 @@ bower_components
 node
 yarn.lock
 .idea/
+.vscode/
 **.iml
 vaadin-confirm-dialog-integration-tests/error-screenshots/
 
