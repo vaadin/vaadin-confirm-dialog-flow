@@ -4,9 +4,6 @@ import com.vaadin.flow.component.button.testbench.ButtonElement;
 import com.vaadin.flow.component.confirmdialog.examples.Dimensions;
 import com.vaadin.flow.component.confirmdialog.testbench.ConfirmDialogElement;
 import com.vaadin.testbench.TestBenchElement;
-import com.vaadin.testbench.annotations.RunLocally;
-import com.vaadin.testbench.parallel.Browser;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,15 +11,7 @@ import org.junit.Test;
 /**
  * DimensionsIT
  */
-@RunLocally(Browser.CHROME)
 public class DimensionsIT extends AbstractParallelTest {
-
-    @Override
-    public void setup() throws Exception {
-        super.setup();
-        System.setProperty("webdriver.chrome.driver", "/Users/diegocardoso/Tools/chromedriver");
-        getDriver().manage().window().setSize(WINDOW_SIZE_MEDIUM);
-    }
 
     @Before
     public void init() {
@@ -50,7 +39,7 @@ public class DimensionsIT extends AbstractParallelTest {
     }
 
     @Test
-    public void testChangeDimensionOnAttachedDialod() {
+    public void testChangeDimensionOnAttachedDialog() {
         attachDialog();
         changeDialogWidth();
         changeDialogHeight();

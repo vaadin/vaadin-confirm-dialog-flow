@@ -40,7 +40,7 @@ import com.vaadin.flow.shared.Registration;
  * @author Vaadin Ltd
  */
 @Tag("vaadin-confirm-dialog")
-@NpmPackage(value="@vaadin/vaadin-confirm-dialog", version = "1.1.1")
+@NpmPackage(value="@vaadin/vaadin-confirm-dialog", version = "1.1.2")
 @JsModule("@vaadin/vaadin-confirm-dialog/src/vaadin-confirm-dialog.js")
 @HtmlImport("frontend://bower_components/vaadin-confirm-dialog/src/vaadin-confirm-dialog.html")
 public class ConfirmDialog extends Component
@@ -587,10 +587,12 @@ public class ConfirmDialog extends Component
         if (getElement().getNode().getParent() == null) {
             UI ui = getCurrentUI();
             ui.beforeClientResponse(ui, context -> {
-                ui.add(this);
-                autoAddedToTheUi = true;
-                updateWidth();
-                updateHeight();
+                if (getElement().getNode().getParent() == null) {
+                    ui.add(this);
+                    autoAddedToTheUi = true;
+                    updateWidth();
+                    updateHeight();
+                }
             });
         }
     }
