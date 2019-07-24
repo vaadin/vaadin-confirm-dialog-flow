@@ -62,9 +62,7 @@ public class DimensionsIT extends AbstractParallelTest {
 
         openDialog();
 
-        height = getCssContentValue("height");
-
-        Assert.assertEquals(Dimensions.DIMENSION_BIGGER, height);
+        waitUntil(driver -> Dimensions.DIMENSION_BIGGER.equals(getCssContentValue("height")));
     }
 
     @Test
@@ -110,7 +108,7 @@ public class DimensionsIT extends AbstractParallelTest {
     }
 
     private TestBenchElement getContent() {
-        return getConfirmDialog().$("div[part=content]").first();
+        return ((TestBenchElement) getConfirmDialog().getContext());
     }
 
     private void attachDialog() {
