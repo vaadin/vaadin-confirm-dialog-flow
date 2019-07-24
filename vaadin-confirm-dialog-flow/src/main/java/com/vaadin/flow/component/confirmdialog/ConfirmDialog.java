@@ -584,16 +584,14 @@ public class ConfirmDialog extends Component
     }
 
     private void ensureAttached() {
-        if (getElement().getNode().getParent() == null) {
-            UI ui = getCurrentUI();
-            ui.beforeClientResponse(ui, context -> {
-                if (getElement().getNode().getParent() == null) {
-                    ui.add(this);
-                    autoAddedToTheUi = true;
-                    updateWidth();
-                    updateHeight();
-                }
-            });
-        }
+        UI ui = getCurrentUI();
+        ui.beforeClientResponse(ui, context -> {
+            if (getElement().getNode().getParent() == null) {
+                ui.add(this);
+                autoAddedToTheUi = true;
+                updateWidth();
+                updateHeight();
+            }
+        });
     }
 }
