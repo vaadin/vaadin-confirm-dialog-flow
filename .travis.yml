@@ -2,12 +2,7 @@ language: java
 jdk: openjdk8
 dist: xenial
 
-script: mvn -B clean verify -Dvaadin.productionMode -Dcom.vaadin.testbench.Parameters.testsInParallel=2 -Dvaadin.proKey=$VAADIN_PRO_KEY -Dsauce.user=$SAUCE_USER -Dsauce.sauceAccessKey=$SAUCE_ACCESSKEY -P$IT_PROFILE
-
-env:
-  matrix:
-    - IT_PROFILE=npm-it,!bower-it
-    - IT_PROFILE=bower-it,!npm-it
+script: mvn -B clean verify -Dvaadin.productionMode -Dcom.vaadin.testbench.Parameters.testsInParallel=2 -Dvaadin.proKey=$VAADIN_PRO_KEY -Dsauce.user=$SAUCE_USER -Dsauce.sauceAccessKey=$SAUCE_ACCESSKEY
 
 #deploy:
 #  - provider: script
