@@ -49,15 +49,6 @@ To build and install the project into the local repository run the following com
 
 ```mvn install -DskipITs```
 
-### Running demos
-
-To compile and run demos locally execute
-
-```
-mvn compile
-mvn -pl vaadin-confirm-dialog-flow-demo -Pwar jetty:run
-```
-
 ### Running integration tests
 
 `-DskipITs` will skip the integration tests, which require a TestBench license. If you want to run all tests as part of the build, run
