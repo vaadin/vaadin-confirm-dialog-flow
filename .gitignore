@@ -16,11 +16,9 @@ vaadin-confirm-dialog-integration-tests/error-screenshots/
 local.properties
 
 # The following files are generated/updated by flow-maven-plugin
-node_modules/
-package.json
-package-lock.json
+package*.json
 pnpm-lock.yaml
-stats.json
+webpack.*.js
 tsconfig.json
-webpack.config.js
-webpack.generated.js
+types.d.ts
+node_modules/
