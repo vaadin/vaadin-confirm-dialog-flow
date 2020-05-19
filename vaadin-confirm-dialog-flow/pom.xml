@@ -71,6 +71,11 @@
         </dependency>
         <dependency>
             <groupId>org.webjars.bowergithub.polymerelements</groupId>
+            <artifactId>iron-resizable-behavior</artifactId>
+            <version>2.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars.bowergithub.polymerelements</groupId>
             <artifactId>iron-meta</artifactId>
             <version>2.1.1</version>
         </dependency>
