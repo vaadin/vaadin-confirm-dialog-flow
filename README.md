@@ -1,5 +1,5 @@
  ⚠️ **This repository is deprecated**
-- Sources for this flow component can be found at https://github.com/vaadin/vaadin-flow-component
+- Sources for this flow component can be found at https://github.com/vaadin/vaadin-flow-components
 - Tickets has been moved to the web component repository https://github.com/vaadin/vaadin-confirm-dialog/issues
 
 [![Published on Vaadin  Directory](https://img.shields.io/badge/Vaadin%20Directory-published-00b4f0.svg)](https://vaadin.com/directory/component/vaadin-confirm-dialog)
